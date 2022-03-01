@@ -12,9 +12,9 @@ export const HouseSchema = new Schema(
     { timestamps: true, toJSON: { virtuals: true } }
 )
 
-// HouseSchema.virtual('creator', {
-//       localField: 'creatorId',
-//       foreignField: '_id',
-//       justOne: true,
-//       ref: 'Account'
-//     })
+HouseSchema.virtual('creator', {
+      localField: 'creatorId',
+      foreignField: '_id',
+      justOne: true,
+      ref: 'Account'
+    })

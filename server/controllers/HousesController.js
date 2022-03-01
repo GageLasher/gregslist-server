@@ -7,8 +7,11 @@ export class HousesController extends BaseController{
         super('api/houses')
         this.router
         .get('', this.getHouses)
+        .get('/:id', this.getById)
         .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.create)
+        .put('/:id', this.edit)
+        .delete('/:id', this.remove)
     }
     async getHouses(req, res, next){
         try {
@@ -48,7 +51,8 @@ export class HousesController extends BaseController{
     async remove(req, res, next){
         try {
             const userId = req.userInfo.id
-            await housesService.remove(req.params.id, userId)
+            const houseId = req.params.id
+            await housesService.remove(houseId, userId)
             return res.send("deleted listing")
         } catch (error) {
             next(error)
